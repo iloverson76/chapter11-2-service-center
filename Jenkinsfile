@@ -9,7 +9,7 @@ node {
     env.PATH = "${mvnHome}/bin:${env.PATH}"
 
     stage('mvn build docker image'){
-        sh 'mvn  clean package'
+        sh 'mvn  clean package -U'
         sh 'mvn package docker:build'
     }
 
