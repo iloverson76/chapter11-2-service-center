@@ -5,6 +5,9 @@ node {
         checkout scm
     }
 
+    def mvnHome = tool('mvn3')
+    env.PATH = "${mvnHome}/bin:${env.PATH}"
+
     stage('mvn build'){
         sh 'mvn  clean package -U -Dmaven.test.skip=true'
     }
