@@ -7,7 +7,8 @@ node {
 
     def mvnHome = tool('mvn3')
     env.PATH = "${mvnHome}/bin:${env.PATH}"
-
+    def workspace = env.WORKSPACE
+   // def jarpath="${workspace}/springCloud-service-center/eureka-server/target"
     stage('mvn build'){
         sh 'mvn  clean package -U -Dmaven.test.skip=true'
     }
