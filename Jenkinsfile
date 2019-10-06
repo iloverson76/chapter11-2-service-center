@@ -4,16 +4,12 @@ node {
         echo "checkout from git repo..."
         checkout scm
     }
-    def javaHome = tool('jdk1.8')
-    def mvnHome = tool('mvn3')
-    env.PATH = "${mvnHome}/bin:${env.PATH}"
 
-    stage('mvn build docker image'){
-        sh 'mvn  clean package -U'
-        sh 'mvn package docker:build'
+    stage('mvn build'){
+        sh 'mvn  clean package -U -Dmaven.test.skip=true'
     }
 
-    stage('mvn test'){
-    sh "echo skip mvn test"
+    stage('docker built'){
+        sh 'docker build -t eureka-server:0.0.1 .'
     }
 }
