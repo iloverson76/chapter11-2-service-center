@@ -7,14 +7,13 @@ node {
     def javaHome = tool('jdk1.8')
     def mvnHome = tool('mvn3')
     env.PATH = "${mvnHome}/bin:${env.PATH}"
+
     stage('mvn build docker image'){
-        //sh "JAVA_HOME=${javaHome} mvn clean package"
-        configFileProvider([configFile(fileId: '****', variable: 'MAVEN_SETTINGS')]) {
-                sh 'mvn -s $MAVEN_SETTINGS clean package'
-                sh 'mvn package docker:build'
-            }
+        sh 'mvn  clean package'
+        sh 'mvn package docker:build'
     }
-		stage('mvn test'){
-        sh "echo skip mvn test"
+
+    stage('mvn test'){
+    sh "echo skip mvn test"
     }
 }
