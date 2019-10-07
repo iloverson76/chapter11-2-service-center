@@ -52,21 +52,10 @@
 
 	<build>
 		<plugins>
-			<!-- mvn javadoc:aggregate -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-
-			<!-- mvn cobertura:cobertura -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-			</plugin>
-			<!--<plugin>-->
-			<!--<groupId>com.github.kongchen</groupId>-->
-			<!--<artifactId>swagger-maven-plugin</artifactId>-->
-			<!--</plugin>-->
 		</plugins>
 	</build>
 
