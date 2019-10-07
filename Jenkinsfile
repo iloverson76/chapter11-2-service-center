@@ -14,6 +14,6 @@ node {
     }
 
     stage('docker built'){
-        sh 'sh build.sh'
+        sh 'build.sh'
     }
 }
