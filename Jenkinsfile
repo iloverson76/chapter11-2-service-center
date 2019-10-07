@@ -11,10 +11,10 @@ node {
     def moduleName="eureka-server"
 
     //设置服务端口号（全局唯一，不能重复，网关根据这个端口号查找服务)
-    def exposePort="8307"
+    def exposePort="8761"
 
     //容器运行的端口号，与服务端口号保持一致
-    def containerPort="8307"
+    def containerPort="8761"
 
     //maven 路径设置：jekins插件管理->全局工具配置->Manven安装
     def mvnHome = tool('mvn3')
@@ -64,7 +64,7 @@ node {
 
       //  sh "docker stop ${tag}"
 
-       // sh "docker rm -f ${tag}"
+        sh "docker rm -f ${tag}"
 
         sh "docker rmi -f ${tag}"
 
