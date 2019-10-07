@@ -2,7 +2,6 @@ node {
     stage('checkout'){
         //必须有，该checkout步骤将检出从源控制代码; scm是一个特殊变量，指示checkout步骤克隆触发此Pipeline运行的特定修订。
         print("checkout from git repo...")
-
         checkout scm
     }
 
@@ -80,9 +79,9 @@ node {
             sh "docker rm ${containerId}"
         }
 
-        def imageId= sh returnStdout: true ,script: "docker images|grep'${tag}'|sed -n '1,1p' | awk '{print \$3}'"
+        def imageId= sh returnStdout: true ,script: "docker images|grep '${tag}'|sed -n '1,1p' | awk '{print \$3}'"
 
-        print(imageId=${imageId})
+        print("imageId=${imageId}")
 
         if(imageId){
             sh "docker rmi -f ${tag}"
