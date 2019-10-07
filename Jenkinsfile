@@ -70,7 +70,7 @@ node {
 
         sh "echo ↓ ↓ ↓ ↓ ↓"
 
-        if(${runningPort}!=null){
+        if(null!="${runningPort}"){
 
             sh "echo 我进来了！!!!!!!!!!!!!!!!"
 
@@ -79,7 +79,7 @@ node {
 
         sh "echo ↑ ↑ ↑ ↑ ↑"
 
-        if(null!=${containerId}){
+        if(null!="${containerId}"){
             sh "docker rm ${containerId}"
         }
 
@@ -89,7 +89,7 @@ node {
 
         sh "echo hehe!-------------------------------"
 
-        if(null!=${imageId}){
+        if(null!="${imageId}"){
             sh "docker rmi -f ${tag}"
         }
 
@@ -101,7 +101,7 @@ node {
 
         def logPath= sh returnStdout: true ,script: "ls ${projLog}"
 
-        if(null==${logPath}){
+        if(null=="${logPath}"){
             sh "mkdir ${projLog} && chown 777 ${projLog}"
         }
 
