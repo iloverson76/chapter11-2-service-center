@@ -62,13 +62,26 @@ node {
 
         sh "mv ${jarHome}/${moduleName}-*.jar ${jarHome}/${app}"
 
-      //  sh "docker stop ${tag}"
+        def containerId= sh returnStdout: true ,script: "docker ps -a|grep ${tag}|sed -n '1,1p' | awk '{print \$1}'"
 
-        sh "docker rm -f ${moduleName}"
+        def runningPort=  sh returnStdout: true ,script: "netstat -ntulp|grep 9999|sed -n '1,1p' | awk '{print \$4}'"
 
-        sh "docker rmi -f ${tag}"
+        if(null!=${runningPort}){
+            sh "docker stop ${containerId}"
+        }
+
+        if(null!=containerId){
+            sh "docker rm ${containerId}"
+        }
+
+        def imageId= sh returnStdout: true ,script: "docker images|grep ${tag}|sed -n '1,1p' | awk '{print \$3}'"
+
+        if(null!=imageId){
+            sh "docker rmi -f ${tag}"
+        }
 
         sh "docker build -t ${tag} ."
+
     }
 
     stage('deploy'){
