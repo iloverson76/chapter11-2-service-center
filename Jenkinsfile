@@ -60,7 +60,7 @@ node {
 
     stage('docker build'){
 
-        sh "mv ${jarHome}/${moduleName}-*.jar ${projHome}/${app}"
+        sh "mv ${jarHome}/${moduleName}-*.jar ${jarHome}/${app}"
 
         sh "docker rmi -f ${tag}"
 
