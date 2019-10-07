@@ -40,7 +40,7 @@ node {
     def tag="${domain}/${moduleName}"
 
     //工程日志目录
-    def projLog="${projHome}/logs"
+    def projLog="${env.WORKSPACE}/logs"
 
     //容器日志目录
     def containerLog="/home/logs"
