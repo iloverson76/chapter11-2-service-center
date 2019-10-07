@@ -3,4 +3,4 @@ FROM gmaslowski/jdk:latest
 
 USER root
 
-COPY springCloud-service-center/eureka-server/target/target/demo.jar /home/
+COPY ./eureka-server/target/app.jar /home/

@@ -5,18 +5,21 @@ node {
         checkout scm
     }
 
+    //定义全局变量
     def mvnHome = tool('mvn3')
+
     env.PATH = "${mvnHome}/bin:${env.PATH}"
-    def workspace = env.WORKSPACE
-   // def jarpath="${workspace}/springCloud-service-center/eureka-server/target"
+
+    def jarPath="${env.WORKSPACE}/eureka-server/target"
+
     stage('mvn build'){
         sh 'mvn  clean package -U -Dmaven.test.skip=true'
     }
 
     stage('docker built'){
 
-        echo "${workspace}"
+        sh 'mv ${jarPath}/eureka-server--*.jar app.jar'
 
-        sh 'sh build.sh'
+        sh 'docker built -t .'
     }
 }
