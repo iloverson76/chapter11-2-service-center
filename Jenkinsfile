@@ -67,6 +67,10 @@ node {
         def runningPort=  sh returnStdout: true ,script: "netstat -ntulp|grep '${exposePort}'|sed -n '1,1p' | awk '{print \$4}'"
 
         sh "echo containerId= ${containerId} && echo runningPort=${runningPort}"
+        
+        def haha="${runningPort}"
+
+        echo "haha=${haha}"
 
         if(null!="${runningPort}"){
 
