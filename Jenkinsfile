@@ -73,7 +73,7 @@ node {
 
     stage('deploy'){
 
-        sh "mkdir ${projLog}"
+     //   sh "mkdir ${projLog}"
 
         //运行容器，换行时首尾要留空格
         sh "docker run -d --restart=on-failure:5 --privileged=true "+
