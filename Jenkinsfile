@@ -70,7 +70,7 @@ node {
 
         sh "echo ↓ ↓ ↓ ↓ ↓"
 
-        if(null!=${runningPort}){
+        if(${runningPort}!=null){
 
             sh "echo 我进来了！!!!!!!!!!!!!!!!"
 
