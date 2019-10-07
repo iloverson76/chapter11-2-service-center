@@ -68,9 +68,16 @@ node {
 
         sh "echo runningPort=${runningPort}"
 
+        sh "echo ↓ ↓ ↓ ↓ ↓"
+
         if(null!=${runningPort}){
+
+            sh "echo 我进来了！!!!!!!!!!!!!!!!"
+
             sh "docker stop ${containerId}"
         }
+
+        sh "echo ↑ ↑ ↑ ↑ ↑"
 
         if(null!=${containerId}){
             sh "docker rm ${containerId}"
