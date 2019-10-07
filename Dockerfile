@@ -3,4 +3,4 @@ FROM gmaslowski/jdk:latest
 
 USER root
 
-COPY ./eureka-server/target/app.jar /home/
+COPY eureka-server/target/app.jar /home/

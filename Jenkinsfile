@@ -7,8 +7,8 @@ node {
 
     //为解决问题：version 变量怎样传进来 或则怎样设置，每次构建和发布时自动累加
 
-    //修改为当前的项目名
-    def projName="eureka-server"
+    //修改为当前的模块名称
+    def moduleName="eureka-server"
 
     //设置服务端口号（全局唯一，不能重复，网关根据这个端口号查找服务)
     def exposePort="8307"
@@ -23,7 +23,7 @@ node {
     env.PATH = "${mvnHome}/bin:${env.PATH}"
 
     //env.WORKSPACE是jenkins当前的工作路径；
-    def projHome="${env.WORKSPACE}/${projName}"
+    def projHome="${env.WORKSPACE}/${moduleName}"
 
     //maven在项目里构建jar包的位置
     def targetDir="target"
@@ -37,7 +37,7 @@ node {
     def domain="chp"
 
     //docker iamge tag
-    def tag="${domain}/${projName}"
+    def tag="${domain}/${moduleName}"
 
     //工程日志目录
     def projLog="${projHome}/logs"
@@ -60,11 +60,11 @@ node {
 
     stage('docker build'){
 
-        sh "mv ${jarHome}/${projName}-*.jar ${projHome}/${app}"
+        sh "mv ${jarHome}/${moduleName}-*.jar ${projHome}/${app}"
 
         sh "docker rmi -f ${tag}"
 
-        sh "docker build -t ${tag} ."
+        sh "docker build --context: ./ -t ${tag} ."
     }
 
     stage('deploy'){
@@ -76,7 +76,7 @@ node {
                 " -w ${contianerWorkDir} "+
                 " -v ${projLog}:${containerLog} "+
                 " -p ${exposePort}:${containerPort} "+
-                " --name ${projName} ${tag} "+
+                " --name ${moduleName} ${tag} "+
                 " java "+
                     " -Djava.security.egd=file:/dev/./urandom "+
                     " -Duser.timezone=Asia/Shanghai "+
