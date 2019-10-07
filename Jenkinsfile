@@ -64,7 +64,8 @@ node {
 
         sh "docker rmi -f ${tag}"
 
-        sh "docker build --context: ./ -t ${tag} ."
+        //--context:./
+        sh "docker build -t ${tag} ."
     }
 
     stage('deploy'){
