@@ -14,6 +14,9 @@ node {
     }
 
     stage('docker built'){
+
+        echo "${workspace}"
+
         sh 'sh build.sh'
     }
 }
