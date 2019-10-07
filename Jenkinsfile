@@ -13,13 +13,13 @@ node {
     def jarPath="${env.WORKSPACE}/eureka-server/target"
 
     stage('mvn build'){
-        sh 'mvn  clean package -U -Dmaven.test.skip=true'
+        sh "mvn  clean package -U -Dmaven.test.skip=true"
     }
 
     stage('docker built'){
 
-        sh 'mv ${jarPath}/eureka-server--*.jar app.jar'
+        sh "mv ${jarPath}/eureka-server-*.jar app.jar"
 
-        sh 'docker built -t .'
+        sh "docker built -t ."
     }
 }
