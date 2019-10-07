@@ -91,7 +91,9 @@ node {
 
     stage('deploy'){
 
-        def logPath= sh returnStdout: true ,script: "ls ${projLog}"
+        def logPath= sh returnStatus: true ,script: "ls ${projLog}"
+
+        print("logPath:=========>"+logPath)
 
         if(logPath){
             sh "mkdir ${projLog} && chown 777 ${projLog}"
