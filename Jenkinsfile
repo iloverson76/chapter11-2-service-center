@@ -66,13 +66,15 @@ node {
 
         echo "${containerId}"
 
-     //   def runningPort=  sh returnStdout: true ,script: "netstat -ntulp|grep 9999|sed -n '1,1p' | awk '{print \$4}'"
+       def runningPort=  sh returnStdout: true ,script: "netstat -ntulp|grep '${exposePort}'|sed -n '1,1p' | awk '{print \$4}'"
+
+        echo "runningPort: ${runningPort}"
 
       //  sh returnStdout: true ,script: "ps -ef|grep amon|grep -v grep|awk '{print \$2}'"
 
         //| awk '{print \$1}
 
-
+        //def runningPort=null
         if(null!=${runningPort}){
             sh "docker stop ${containerId}"
         }
@@ -81,8 +83,8 @@ node {
             sh "docker rm ${containerId}"
         }
 
-        def imageId= sh returnStdout: true ,script: "docker images|grep ${tag}|sed -n '1,1p' | awk '{print \$3}'"
-
+       // def imageId= sh returnStdout: true ,script: "docker images|grep \${tag}|sed -n '1,1p' | awk '{print \$3}'"
+        def imageId=null;
         if(null!=imageId){
             sh "docker rmi -f ${tag}"
         }
