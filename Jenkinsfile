@@ -14,6 +14,6 @@ node {
     }
 
     stage('docker built'){
-        sh 'docker build -t eureka-server:0.0.1 .'
+        sh './build.sh'
     }
 }
