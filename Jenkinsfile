@@ -68,16 +68,12 @@ node {
 
         sh "echo containerId= ${containerId} && echo runningPort=${runningPort}"
         
-        def haha="${runningPort}"
-
-        echo "haha=${haha}"
-
-        if(null!="${runningPort}"){
+        if( runningPort){
 
             sh "docker stop ${containerId}"
         }
 
-        if(null!="${containerId}"){
+        if(containerId){
             sh "docker rm ${containerId}"
         }
 
@@ -85,7 +81,7 @@ node {
 
         sh "echo imageId=${imageId}"
 
-        if(null!="${imageId}"){
+        if(imageId){
             sh "docker rmi -f ${tag}"
         }
 
@@ -97,7 +93,7 @@ node {
 
         def logPath= sh returnStdout: true ,script: "ls ${projLog}"
 
-        if(null=="${logPath}"){
+        if(logPath){
             sh "mkdir ${projLog} && chown 777 ${projLog}"
         }
 
