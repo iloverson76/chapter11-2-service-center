@@ -66,35 +66,26 @@ node {
 
         def runningPort=  sh returnStdout: true ,script: "netstat -ntulp|grep '${exposePort}'|sed -n '1,1p' | awk '{print \$4}'"
 
-        sh "echo runningPort=${runningPort}"
-
-        sh "echo ↓ ↓ ↓ ↓ ↓"
+        sh "echo containerId= ${containerId} && echo runningPort=${runningPort}"
 
         if(null!="${runningPort}"){
 
-            sh "echo 我进来了！!!!!!!!!!!!!!!!"
-
             sh "docker stop ${containerId}"
         }
-
-        sh "echo ↑ ↑ ↑ ↑ ↑"
 
         if(null!="${containerId}"){
             sh "docker rm ${containerId}"
         }
 
-        sh "echo haha!---------------------------------"
-
         def imageId= sh returnStdout: true ,script: "docker images|grep'${tag}'|sed -n '1,1p' | awk '{print \$3}'"
 
-        sh "echo hehe!-------------------------------"
+        sh "echo imageId=${imageId}"
 
         if(null!="${imageId}"){
             sh "docker rmi -f ${tag}"
         }
 
         sh "docker build -t ${tag} ."
-
     }
 
     stage('deploy'){
