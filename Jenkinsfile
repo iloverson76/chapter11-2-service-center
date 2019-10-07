@@ -71,19 +71,20 @@ node {
 
         sh "mkdir ${projLog}"
 
-        sh "docker run -d --restart=on-failure:5 --privileged=true"+
-                "-w ${contianerWorkDir}"+
-                "-v ${projLog}:${containerLog}"+
-                "-p ${exposePort}:${containerPort}"+
-                "--name ${projName} ${tag}"+
-                "java"+
-                    "-Djava.security.egd=file:/dev/./urandom"+
-                    "-Duser.timezone=Asia/Shanghai"+
-                    "-XX:+PrintGCDateStamps"+
-                    "-XX:+PrintGCTimeStamps"+
-                    "-XX:+PrintGCDetails"+
-                    "-XX:+HeapDumpOnOutOfMemoryError"+
-                    "-Xloggc:${gcLog}"+
-                    "-jar ${containerApp}"
+        //运行容器，换行时首尾要留空格
+        sh "docker run -d --restart=on-failure:5 --privileged=true "+
+                " -w ${contianerWorkDir} "+
+                " -v ${projLog}:${containerLog} "+
+                " -p ${exposePort}:${containerPort} "+
+                " --name ${projName} ${tag} "+
+                " java "+
+                    " -Djava.security.egd=file:/dev/./urandom "+
+                    " -Duser.timezone=Asia/Shanghai "+
+                    " -XX:+PrintGCDateStamps "+
+                    " -XX:+PrintGCTimeStamps "+
+                    " -XX:+PrintGCDetails "+
+                    " -XX:+HeapDumpOnOutOfMemoryError "+
+                    " -Xloggc:${gcLog} "+
+                    " -jar ${containerApp} "
     }
 }
