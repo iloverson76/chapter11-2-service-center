@@ -95,8 +95,9 @@ node {
 
         print("logPath:=========>"+logPath)
 
-        if(logPath){
-            sh "mkdir ${projLog} '&&' chown 777 ${projLog}"
+        if(logPath>0){
+            sh "mkdir ${projLog}"
+            sh "chown 777 ${projLog}"
         }
 
         //运行容器，换行时首尾留空格
