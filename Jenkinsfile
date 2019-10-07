@@ -62,9 +62,9 @@ node {
 
         sh "mv ${jarHome}/${moduleName}-*.jar ${jarHome}/${app}"
 
-        def containerId= sh returnStdout: true ,script: "docker ps -a|grep '${tag}' | awk '{print \$1}"
+        def containerId= sh returnStdout: true ,script: "docker ps -a|grep '${tag}' | awk '{print \$1}'"
 
-       def runningPort=  sh returnStdout: true ,script: "netstat -ntulp|grep '${exposePort}'|sed -n '1,1p' | awk '{print \$4}'"
+        def runningPort=  sh returnStdout: true ,script: "netstat -ntulp|grep '${exposePort}'|sed -n '1,1p' | awk '{print \$4}'"
 
         if(null!=${runningPort}){
             sh "docker stop ${containerId}"
