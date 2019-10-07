@@ -85,6 +85,7 @@ node {
             sh "docker rmi -f ${tag}"
         }
 
+        //构建镜像
         sh "docker build -t ${tag} ."
     }
 
@@ -96,7 +97,7 @@ node {
             sh "mkdir ${projLog} && chown 777 ${projLog}"
         }
 
-        //运行容器，换行时首尾要留空格
+        //运行容器，换行时首尾留空格
         sh "docker run -d --restart=on-failure:5 --privileged=true "+
                 " -w ${contianerWorkDir} "+
                 " -v ${projLog}:${containerLog} "+
