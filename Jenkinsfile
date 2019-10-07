@@ -64,6 +64,8 @@ node {
 
         sh "docker rmi -f ${tag}"
 
+        sh "docker rm -f ${tag}"
+
         //--context:./
         sh "docker build -t ${tag} ."
     }
