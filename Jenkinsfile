@@ -64,7 +64,7 @@ node {
 
       //  sh "docker stop ${tag}"
 
-        sh "docker rm -f ${tag}"
+        sh "docker rm -f ${moduleName}"
 
         sh "docker rmi -f ${tag}"
 
