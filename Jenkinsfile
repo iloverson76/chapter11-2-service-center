@@ -62,30 +62,21 @@ node {
 
         sh "mv ${jarHome}/${moduleName}-*.jar ${jarHome}/${app}"
 
-        def containerId= sh returnStdout: true ,script: "docker ps -a|grep chp/eureka-server"
-
-        echo "${containerId}"
+        def containerId= sh returnStdout: true ,script: "docker ps -a|grep '${tag}' | awk '{print \$1}"
 
        def runningPort=  sh returnStdout: true ,script: "netstat -ntulp|grep '${exposePort}'|sed -n '1,1p' | awk '{print \$4}'"
 
-        echo "runningPort: ${runningPort}"
-
-      //  sh returnStdout: true ,script: "ps -ef|grep amon|grep -v grep|awk '{print \$2}'"
-
-        //| awk '{print \$1}
-
-        //def runningPort=null
         if(null!=${runningPort}){
             sh "docker stop ${containerId}"
         }
 
-        if(null!=containerId){
+        if(null!=${containerId}){
             sh "docker rm ${containerId}"
         }
 
-       // def imageId= sh returnStdout: true ,script: "docker images|grep \${tag}|sed -n '1,1p' | awk '{print \$3}'"
-        def imageId=null;
-        if(null!=imageId){
+        def imageId= sh returnStdout: true ,script: "docker images|grep'${tag}'|sed -n '1,1p' | awk '{print \$3}'"
+
+        if(null!=${imageId}){
             sh "docker rmi -f ${tag}"
         }
 
