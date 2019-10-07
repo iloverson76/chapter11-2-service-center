@@ -16,10 +16,10 @@ node {
         sh "mvn  clean package -U -Dmaven.test.skip=true"
     }
 
-    stage('docker built'){
+    stage('docker build'){
 
-        sh "mv ${jarPath}/eureka-server-*.jar app.jar"
+        sh "mv ${jarPath}/eureka-server-*.jar ${jarPath}/app.jar"
 
-        sh "docker built -t ."
+        sh "docker build -t ."
     }
 }
