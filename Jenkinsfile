@@ -62,7 +62,7 @@ node {
 
         sh "mv ${jarHome}/${moduleName}-*.jar ${jarHome}/${app}"
 
-        def containerId= sh returnStdout: true ,script: "docker ps -a|grep chp/eureka-server|sed -n '1,1p''"
+        def containerId= sh returnStdout: true ,script: "docker ps -a|grep chp/eureka-server"
 
         echo "${containerId}"
 
