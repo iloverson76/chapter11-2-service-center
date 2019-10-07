@@ -5,7 +5,7 @@ node {
         checkout scm
     }
 
-    //为解决问题：version 变量怎样传进来 或则怎样设置，每次构建和发布时自动累加
+    //未解决问题：version 变量怎样传进来 或则怎样设置，每次构建和发布时自动累加
 
     //修改为当前的模块名称
     def moduleName="eureka-server"
@@ -62,7 +62,7 @@ node {
 
         sh "mv ${jarHome}/${moduleName}-*.jar ${jarHome}/${app}"
 
-        def containerId= sh returnStdout: true ,script: "docker ps -a|grep ${tag}|sed -n '1,1p' | awk '{print \$1}'"
+        def containerId= sh returnStdout: true ,script: "docker ps -a|grep chp/eureka-server|sed -n '1,1p' | awk '{print \$1}'"
 
         def runningPort=  sh returnStdout: true ,script: "netstat -ntulp|grep 9999|sed -n '1,1p' | awk '{print \$4}'"
 
