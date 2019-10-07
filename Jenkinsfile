@@ -62,11 +62,12 @@ node {
 
         sh "mv ${jarHome}/${moduleName}-*.jar ${jarHome}/${app}"
 
-        sh "docker rmi -f ${tag}"
+        sh "docker stop ${tag}"
 
         sh "docker rm -f ${tag}"
 
-        //--context:./
+        sh "docker rmi -f ${tag}"
+
         sh "docker build -t ${tag} ."
     }
 
