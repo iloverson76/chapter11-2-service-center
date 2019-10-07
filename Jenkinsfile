@@ -25,6 +25,8 @@ node {
 
         sh "mv ${jarPath}/eureka-server-*.jar ${jarPath}/app.jar"
 
+        sh "docker rmi -f $img_output"
+
         sh "docker build -t $img_output ."
     }
 }
