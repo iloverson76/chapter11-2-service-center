@@ -66,6 +66,8 @@ node {
 
         def runningPort=  sh returnStdout: true ,script: "netstat -ntulp|grep '${exposePort}'|sed -n '1,1p' | awk '{print \$4}'"
 
+        sh "echo runningPort=${runningPort}"
+
         if(null!=${runningPort}){
             sh "docker stop ${containerId}"
         }
@@ -74,7 +76,11 @@ node {
             sh "docker rm ${containerId}"
         }
 
+        sh "echo haha!---------------------------------"
+
         def imageId= sh returnStdout: true ,script: "docker images|grep'${tag}'|sed -n '1,1p' | awk '{print \$3}'"
+
+        sh "echo hehe!-------------------------------"
 
         if(null!=${imageId}){
             sh "docker rmi -f ${tag}"
@@ -86,7 +92,11 @@ node {
 
     stage('deploy'){
 
-     //   sh "mkdir ${projLog}"
+        def logPath= sh returnStdout: true ,script: "ls ${projLog}"
+
+        if(null==${logPath}){
+            sh "mkdir ${projLog} && chown 777 ${projLog}"
+        }
 
         //运行容器，换行时首尾要留空格
         sh "docker run -d --restart=on-failure:5 --privileged=true "+
