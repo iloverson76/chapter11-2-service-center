@@ -62,9 +62,16 @@ node {
 
         sh "mv ${jarHome}/${moduleName}-*.jar ${jarHome}/${app}"
 
-        def containerId= sh returnStdout: true ,script: "docker ps -a|grep chp/eureka-server|sed -n '1,1p' | awk '{print \$1}'"
+        def containerId= sh returnStdout: true ,script: "docker ps -a|grep chp/eureka-server|sed -n '1,1p''"
 
-        def runningPort=  sh returnStdout: true ,script: "netstat -ntulp|grep 9999|sed -n '1,1p' | awk '{print \$4}'"
+        echo "${containerId}"
+
+     //   def runningPort=  sh returnStdout: true ,script: "netstat -ntulp|grep 9999|sed -n '1,1p' | awk '{print \$4}'"
+
+      //  sh returnStdout: true ,script: "ps -ef|grep amon|grep -v grep|awk '{print \$2}'"
+
+        //| awk '{print \$1}
+
 
         if(null!=${runningPort}){
             sh "docker stop ${containerId}"
